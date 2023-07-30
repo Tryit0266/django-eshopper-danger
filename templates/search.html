@@ -30,6 +30,15 @@
                 </div>
             </div>
         </div>
+
+        {% empty %}
+
+  <center><div class="text-dark text-center px-3" style="font-size:16px; font-weight: 600;">
+       We're sorry. {{ searched }} isn't available. Please check out something else you might like.
+
+
+        </div></center>
+
         {% endfor %}
     </div>
 {% if itemList.has_previous %}
@@ -40,11 +49,25 @@
 
 
 {% else %}
-<div class="container-fluid bg-secondary mb-5">
-    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 80px">
-        <h2 class="section-title font-weight-medium"><span class="px-2 bg-secondary font-weight-medium text-center">
-        Search bar can't be empty</span></h2>
-    </div>
-</div>
+<div class="container-fluid bg-secondary mb-5 py-3">
+    <div class="text-center">
+        <h2 class="font-weight-medium"><span class=" bg-secondary font-weight-medium text-center">
+    What're you looking for??? </span></h2>
+    </div></div>
+        <div class="container-fluid">
+            <form action="{% url 'core:search' %}" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" class="form-control w-100 rounded shadow" style="border:1px solid #ADD8E6;" placeholder="Search for products" name="searched">
+
+                        <button class="btn btn-danger w-100 mt-3 btn-lg text-danger rounded shadow text-dark" style="border:1px solid #ADD8E6; font-weight:600; font-size:20px;" type="submit">
+                            Search
+                        </button>
+
+                </div>
+            </form>
+        </div>
+
+
 {% endif %}
 {% endblock %}
